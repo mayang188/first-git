@@ -1,0 +1,3 @@
+function hra () {
+  return 'ewqe';
+}
