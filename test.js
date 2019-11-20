@@ -1,3 +1,7 @@
 function test(){
-  return "weqw"
+ return function(){
+   console.log('====================================');
+   console.log();
+   console.log('====================================');
+ }
 }
