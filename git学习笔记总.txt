@@ -1,0 +1,122 @@
+git init：初始化一个空仓库(打git init命令的时候需要把目录切到需要初始化空仓库的目录下)
+
+git add 文件名 : 代码编辑区向暂存区提交一个文件
+
+git add 文件1 文件2 :代码编辑区向暂存区提交两个文件
+
+git add . :提交所有修改的和新建的数据暂存区
+
+git add -u :提交所有被删除和修改的文件到数据暂存区
+
+git add -A :提交所有被删除、被替换、被修改和新增的文件到数据暂存区
+
+git commit -m '注释'
+
+git status ：查看工作树的状态，这个状态包括工作区和缓存区的变化都会记录，比如新增，修改，删除，add提交都会记录。
+
+git diff 文件名 :用来对比文件版本的区别，旧版本和新版本的区别，如果当前版本没有修改变更则无变化输出
+
+
+git reset --hard HEAD^	:回退一个版本
+
+git reset --hard HEAD^^ :回退两个版本
+
+git reset --hard HEAD~3 :回退三个版本
+
+git reset --hard 版本号前6位 :去往版本号指定的版本
+
+git log :  显示比当前版本旧的版本信息（包含当前版本），作者，日期，注释，版本号
+
+git reflog : 显示提交的所有版本
+
+在每次修改工作区后都需要add提交暂存区，修改或新增只会由暂存区提交仓库，不会从工作区直接提交到仓库
+
+git checkout -- 要撤销的文件名	:  把工作区的修改撤销掉（注意不是暂存区，更不是仓库）
+
+git reset HEAD 要撤销的文件名 : 把暂存区的修改撤销掉（注意不是仓库，也不是工作区）
+
+git rm 文件名 ： 从git
+
+
+远程仓库：
+
+1、需要在本地生成SSH 公钥秘钥:ssh-keygen -t rsa -C "youremail@example.com"
+
+2、把公钥内容上传到Git hub上（账号管理->setting->SSH and GPG keys）
+
+本地、远程仓库交互方式：
+
+1、在github官网上新建一个仓库
+
+2、克隆当前仓库到本地 : git clone 远程仓库地址
+
+3、修改本地代码，提交本地；
+
+4、git push origin master:master
+
+5、修改远程仓库的readMe.md文件内容
+
+6、本地执行 git pull origin master:master
+
+
+分支管理：
+
+创建分支：git branch dev（创建dev分支） , git checkout -b dev (创建dev分支并切换到dev分支上)
+切换分支：git checkout dev(切换到dev分支上) 或 git switch dev
+
+合并分支: git merge dev (合并dev分支到当前分支上)
+
+删除分支:git branch -d dev (删除dev分支)
+
+强行删除分支：git branch -D dev(当dev分支的新增内容没有合并都master分支的时候，-d删除会提示失败,可以是用-D删除)
+
+
+标签管理：
+
+打标签：git tag v1.0（给当前commit打标签），git tag v0.9 efdc5e7(给指定commit版本打标签)
+删除标签：git tag -d v1.0(删除v1.0的标签)
+显示所有标签：git tag
+
+显示标签对应的commit内容 : git show v1.0
+
+push管理：
+
+git push推送远程仓库，是从本地仓库推送到远程仓库，本地的工作区和暂存区的内容是不推送的
+git push <远程主机名> <本地分支名>:<远程分支名>
+
+删除远程分支：
+git push origin :master
+或
+git push origin --delete master
+
+
+pull管理：
+
+
+git pull <远程主机名> <远程分支名>:<本地分支名>
+
+当无法pull或merge的时候，如果报错信息为：fatal: refusing to merge unrelated histories，可以使用下面的手段拉取
+
+git pull origin master --allow-unrelated-histories
+
+
+当无法pull的时候，查看本地和远程是否内容不一致，有冲突，如果有冲突则使用:
+
+git merge origin/master 将远程主机的master分支和本地当前分支进行合并，然后手动解决冲突。解决冲突后，提交本地仓库，然后再push到远程。
+
+
+远程标签管理：
+
+命令git push origin <tagname>可以推送一个本地标签；
+
+命令git push origin --tags可以推送全部未推送过的本地标签；
+
+命令git push origin :refs/tags/<tagname>可以删除一个远程标签。
+
+git与远程仓库建立关系：
+git remote add origin git@server-name:path/repo-name.git
+
+移除远端仓库：
+git remote remove origin   
+
+
