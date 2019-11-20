@@ -1,1 +1,1 @@
-var beautifulgirl = "jesscia alba";
+var BeautifulGirl = "Jesscia Alba";
